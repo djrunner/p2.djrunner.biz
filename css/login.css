@@ -1,0 +1,25 @@
+body		{
+	font-family: sans-serif; 
+}
+
+#login		{
+	font-weight: 		bold;
+
+	/* Creates and colors Sign up block */
+	border-style: 		solid;
+	border-color:		#CCCCFF;
+	background-color: 	#CCCCFF;
+	width:				500px;
+	height:  			200px;
+	padding:  			20px;
+
+	/* Centers block in center of age */
+	position: absolute;
+	top:				50%;
+	left:				50%;
+	margin-top:			-120px;
+	margin-left:		-270px;
+
+	/* Creates rounded edges around block */
+	border-radius:		25px;
+}
