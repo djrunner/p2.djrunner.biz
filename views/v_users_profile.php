@@ -13,7 +13,7 @@
 		<input type="submit" name="submit" value="Submit">
 	</form>
 
-	<img src="../<?=$user->image_location?>">
+	<img src="../<?=$user->image_location?>" width="200" height="200" alt="profile_pic">
 </p>
 
 </div>
