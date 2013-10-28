@@ -1,4 +1,4 @@
-<div id="SignUp">
+<div class="mainBox" id="signUp">
 
 <form method='POST' action='/users/p_signup'>
 

@@ -96,3 +96,39 @@ html {
 	float:   			right;
 	margin-bottom :		25px;
 }
+
+#posts_index 		{
+
+		/* Size of profile box */
+	width:				600px;
+	height:  			500px;
+
+	/* Centering of porfile box */
+	margin-top:			-270px;
+	margin-left:		-320px;
+
+	overflow:			auto;
+}
+
+#posts_index_inside {
+
+	border-style: 		solid; 
+	border-color:		#9999CC;
+	background-color: 	#9999CC;
+	padding:  			20px;
+	margin:				20px;  
+	border-radius:		25px;
+
+	width:				500px;
+	height:				200px;
+
+	overflow:			auto;
+}
+
+#posts_index_inside img {
+
+	float:   			right;
+	margin-bottom :		25px;
+}
+
+

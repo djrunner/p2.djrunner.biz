@@ -1,3 +1,5 @@
+<div class="mainBox" id="posts">
+
 <?php foreach($posts as $post): ?>
 
 <article>
@@ -12,15 +14,16 @@
         <?=Time::display($post['created'])?>
     </time>
 
-    <?php if(isset($users_posts['awkward'])): ?>
-		<p>worked!</p>
-
-
+    <?php if($post['post_user_id'] == $post['follower_id']): ?>
+    	<a href='/posts/p_delete/<?=$post['post_id']?>'>Delete this post</a>
 	<!-- Otherwise, show the follow link -->
 	<?php else: ?>
-		<a href='/posts/awkward/<?=$post['post_id']?>'>Mark as Awkward</a>
 	<?php endif; ?>
+
+    <br><br>
 
 </article>
 
 <?php endforeach; ?>
+
+</div>
