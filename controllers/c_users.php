@@ -21,7 +21,7 @@ class users_controller extends base_controller {
 
         #Create array of CSS files
         $client_files_head = Array (
-            '../css/signup.css'
+            '../css/css.css'
             );
 
         #Use Load client_files to generate the links from the above array
@@ -51,7 +51,13 @@ class users_controller extends base_controller {
 
         # For now, just confirm they've signed up -
 
-        echo "You're signed up";
+        $data = Array(
+            "created"          => Time::now(),
+            "user_id"          => $user_id,
+            "user_id_followed" => $user_id
+            );
+
+        DB::instance(DB_NAME)->insert('users_users', $data);
 
         Router::redirect('/users/login');
     }
@@ -68,8 +74,8 @@ class users_controller extends base_controller {
 
         #Create array of CSS files
         $client_files_head = Array (
-            '../css/login.css',
-            '../../css/login.css',
+            '../css/css.css',
+            '../../css/css.css',
             '../../css/error.css'
             );
 
@@ -137,7 +143,7 @@ class users_controller extends base_controller {
 
     }
 
-    public function profile($user_name = NULL, $error = NULL) {
+    public function profile($user_name = NULL) {
 
         #If user is blank, they're not logged in; redirect them to the Login page
         if (!$this->user) {
@@ -150,16 +156,13 @@ class users_controller extends base_controller {
         $this->template->content = View::instance('v_users_profile');
         $this->template->title = "Profile of ".$this->user->first_name;
 
-        # Set up error
-        $this->template->content->error = $error;
 
         $this->template->content->user_name = $user_name;
 
         #Create array of CSS files
         $client_files_head = Array (
-            '../css/profile.css',
-            '../../css/profile.css',
-            '../../css/error.css'
+            '../css/css.css',
+            '../../css/css.css'
             );
 
         #Use Load client_files to generate the links from the above array
@@ -209,7 +212,7 @@ class users_controller extends base_controller {
             }
         }
         else {
-            Router::redirect("/users/profile/error");
+            Router::redirect("/users/profile");
         }
     }
 } # end of the class
