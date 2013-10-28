@@ -1,0 +1,98 @@
+html {
+	font-family: sans-serif;
+	font-weight: 		bold;
+}
+
+.mainBox {
+
+	
+
+	/* Creates and colors main Box */
+	border-style: 		solid; 
+	border-color:		#CCCCFF;
+	background-color: 	#CCCCFF;
+	padding:  			30px;    
+
+	/* Centers block in center of page */
+	position: absolute;
+	top:				50%;
+	left:				50%;   
+
+	/* Creates rounded edges around block */
+	border-radius:		25px;
+
+.error {
+	color: red;
+}
+
+
+}
+
+#login		{
+
+	/* Size of login box */
+	width:				500px;
+	height:  			200px;
+
+	/* Centering of login box */
+	margin-top:			-120px;
+	margin-left:		-270px;
+}
+
+#signUp		{
+
+	/* Size of signUp box */
+	width:				500px;
+	height:  			300px;
+
+	/* Centering of signUp box */
+	margin-top:			-170px;
+	margin-left:		-270px;
+
+}
+
+#profile	{
+
+	/* Size of profile box */
+	width:				500px;
+	height:  			400px;
+
+	/* Centering of porfile box */
+	margin-top:			-220px;
+	margin-left:		-270px;
+}
+
+#posts_users 		{
+
+		/* Size of profile box */
+	width:				400px;
+	height:  			500px;
+
+	/* Centering of porfile box */
+	margin-top:			-270px;
+	margin-left:		-220px;
+
+	overflow:			auto;
+	
+
+}
+
+#posts_users_inside	{
+
+	border-style: 		solid; 
+	border-color:		#9999CC;
+	background-color: 	#9999CC;
+	padding:  			20px;
+	margin:				20px;  
+	border-radius:		25px;
+
+	width:				300px;
+	height:				50px;
+
+}
+
+#posts_users_inside img{
+
+	float:   			right;
+	margin-bottom :		25px;
+}
