@@ -8,16 +8,28 @@ class posts_controller extends base_controller {
 		# Make sure user is logged in if they want to use anything in this controller
 
 		if(!$this->user) {
-			Router::redirect('users/login');
+			Router::redirect('/users');
 		}
 
 	}
 
-	public function add() {
+	public function add($error = NULL) {
 
 		# Set up view
 		$this->template->content = View::instance('v_posts_add');
 		$this->template->title   = "New Post";
+
+        # Set up error
+        $this->template->content->error = $error;
+
+        #Create array of CSS files
+        $client_files_head = Array (
+            '../css/css.css',
+            '../../css/css.css'
+            );
+
+        #Use Load client_files to generate the links from the above array
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
 
 		# Render template
 		echo $this->template;
@@ -25,6 +37,11 @@ class posts_controller extends base_controller {
 	}
 
 	public function p_add() {
+
+        if($_POST['content'] == null ||  $_POST['content'] == '' ) {
+
+            Router::redirect('/posts/add/error');
+        }
 
 		# Associate this post with this user
 		$_POST['user_id'] = $this->user->user_id;
@@ -43,6 +60,8 @@ class posts_controller extends base_controller {
 
     public function p_delete($post_id_to_delete) {
 
+        #Delete a post
+
         DB::instance(DB_NAME)->delete('posts', "WHERE post_id = '$post_id_to_delete'");
 
         Router::redirect('/posts/index');
@@ -55,6 +74,7 @@ class posts_controller extends base_controller {
     $this->template->title   = "Posts";
 
     # Build the query
+    # Order posts by created date in Descending order
     $q = 'SELECT 
             posts.content,
             posts.created,
@@ -69,8 +89,8 @@ class posts_controller extends base_controller {
             ON posts.user_id = users_users.user_id_followed
         INNER JOIN users 
             ON posts.user_id = users.user_id
-        WHERE users_users.user_id = '.$this->user->user_id;
-
+        WHERE users_users.user_id = '.$this->user->user_id .'
+        ORDER BY posts.created DESC' ;
 
 
     # Run the query
@@ -98,7 +118,8 @@ class posts_controller extends base_controller {
     	$this->template->content = View::instance('/v_posts_users');
     	$this->template->title   = "Users";
 
-    	# Build the query to get all the users
+    	# Build the query to get all the users, except current user signed in.
+        # Note, user set up to follow himself/herself from p_signUp function. 
     	$q = "SELECT *
     		From users
             WHERE user_id != ".$this->user->user_id;
