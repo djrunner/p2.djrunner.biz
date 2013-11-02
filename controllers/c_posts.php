@@ -79,6 +79,14 @@ class posts_controller extends base_controller {
     # Pass data to the View
     $this->template->content->posts = $posts;
 
+    #Create array of CSS files
+        $client_files_head = Array (
+            '../css/css.css'
+            );
+
+        #Use Load client_files to generate the links from the above array
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
+
     # Render the View
     echo $this->template;
 

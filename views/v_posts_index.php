@@ -1,8 +1,10 @@
-<div class="mainBox" id="posts">
+<div class="mainBox" id="posts_index">
 
 <?php foreach($posts as $post): ?>
 
 <article>
+
+    <div id="posts_index_inside">
 
     <h1><?=$post['first_name']?> <?=$post['last_name']?> posted:</h1>
 
@@ -21,6 +23,8 @@
 	<?php endif; ?>
 
     <br><br>
+
+    </div>
 
 </article>
 

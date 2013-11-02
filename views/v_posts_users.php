@@ -3,9 +3,7 @@
 <?php foreach($users as $user): ?>
 
     
-	<?php if($user['user_id'] == $current_user): ?>
 		
-	<?php else: ?>	
 
 		<div id="posts_users_inside">
 
@@ -30,7 +28,7 @@
 
 		<br><br>
 
-		<?php endif; ?>
+		
 
 		</div>
 

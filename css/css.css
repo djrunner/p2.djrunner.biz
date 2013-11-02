@@ -1,11 +1,14 @@
+/****************************************************CSS for Micro-Blog*******************************************/
+
+/* Standard text for all of the Micro-Blog */
 html {
 	font-family: sans-serif;
 	font-weight: 		bold;
 }
 
+/* the mainBox class designates the template for the center box for each page. *
+   The Width and height will be decided individualy for each page */
 .mainBox {
-
-	
 
 	/* Creates and colors main Box */
 	border-style: 		solid; 
@@ -20,15 +23,64 @@ html {
 
 	/* Creates rounded edges around block */
 	border-radius:		25px;
+}
 
+/* Standard red text for each error meesage in the Micro-Blog */
 .error {
 	color: red;
 }
 
+/******************************************** CSS for the master view template ****************************************/
+
+#v_template_menu		a 		{
+
+/* removes the underlines and centers each link wthin it's box */
+	text-decoration: 	none;
+	text-align:  		center;
+	color:				#3333FF;
+
+/* creates the border for the link box */
+	border-style:  		solid;
+	border-color:  		#CCCCFF;
+	background-color:  	#CCCCFF;
+	border-radius:  	25px;
+
+/* Size and padding of link box */
+	width:				100px;
+	height:				25px;
+	padding:  			15px;
+	margin: 			15px;
+
+/* Floats each box to the left of the page */
+	float:				left;
+	clear:				left;
 
 }
 
-#login		{
+#v_template_menu	a:hover		{
+
+	background-color:  	white;
+}
+
+/******************************************** CSS for each function in the index controller ***********************************/
+
+#index_index		{
+
+	text-align:  		center;
+
+	/* Size of index box */
+	width:				500px;
+	height:  			200px;
+
+	/* Centering of index box */
+	margin-top:			-120px;
+	margin-left:		-270px;
+
+} 
+
+/******************************************** CSS for each function in the users controller ***********************************/
+
+#users_login		{
 
 	/* Size of login box */
 	width:				500px;
@@ -39,19 +91,19 @@ html {
 	margin-left:		-270px;
 }
 
-#signUp		{
+#users_signUp		{
 
 	/* Size of signUp box */
 	width:				500px;
-	height:  			300px;
+	height:  			350px;
 
 	/* Centering of signUp box */
-	margin-top:			-170px;
+	margin-top:			-195px;
 	margin-left:		-270px;
 
 }
 
-#profile	{
+#users_profile	{
 
 	/* Size of profile box */
 	width:				500px;
@@ -62,13 +114,15 @@ html {
 	margin-left:		-270px;
 }
 
+/******************************************** CSS for each function in the posts controller ***********************************/
+
 #posts_users 		{
 
-		/* Size of profile box */
+		/* Size of list of users box */
 	width:				400px;
 	height:  			500px;
 
-	/* Centering of porfile box */
+	/* Centering list of users box */
 	margin-top:			-270px;
 	margin-left:		-220px;
 
@@ -77,6 +131,7 @@ html {
 
 }
 
+/* Creates an interior box for each user in the list of users box */
 #posts_users_inside	{
 
 	border-style: 		solid; 
@@ -91,10 +146,22 @@ html {
 
 }
 
+/* floats the users image to the right */
 #posts_users_inside img{
 
 	float:   			right;
 	margin-bottom :		25px;
+}
+
+#posts_add			{
+
+		/* Size of list of posts box */
+	width:				500px;
+	height:  			250px;
+
+	/* Centering of list of posts box */
+	margin-top:			-145px;
+	margin-left:		-270px;
 }
 
 #posts_index 		{
@@ -110,6 +177,7 @@ html {
 	overflow:			auto;
 }
 
+/* Creates an interior box for each post in the list of posts box */
 #posts_index_inside {
 
 	border-style: 		solid; 
@@ -125,10 +193,17 @@ html {
 	overflow:			auto;
 }
 
+/* floats the users image to the right */
 #posts_index_inside img {
 
 	float:   			right;
 	margin-bottom :		25px;
 }
 
+#posts_index_inside p {
 
+
+	font-weight:  		normal;
+}
+
+/* End of CSS /*

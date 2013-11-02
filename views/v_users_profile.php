@@ -13,6 +13,8 @@
 		<input type="submit" name="submit" value="Submit">
 	</form>
 
+	<br>
+
 	<?php if(isset($user->image_location)): ?>
 		<img src="../<?=$user->image_location?>" width="150" height="150" alt="profile_pic">
 	<?php else: ?>

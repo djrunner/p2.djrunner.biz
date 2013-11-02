@@ -14,22 +14,22 @@
 
 	<div id='menu'>
 
-		<a href='/'>Home</a>
+		<a href='/'>Home</a><br>
 
 		<!-- Menu for users who ar logged in -->
 		<?php if($user): ?>
 
-			<a href='/users/logout'>Logout</a>
-			<a href='/users/Profile'>Profile</a>
-			<a href='/posts/index'>Posts</a>
-			<a href='/posts/add'>Add Posts</a>
-			<a href='/posts/users'>Users</a>
+			<a href='/users/logout'>Logout</a><br>
+			<a href='/users/Profile'>Profile</a><br>
+			<a href='/posts/index'>See Posts</a><br>
+			<a href='/posts/add'>Add Posts</a><br>
+			<a href='/posts/users'>See Users</a><br>
 
 		<!-- Menu options for users who are not logged in -->
 		<?php else: ?>
 
-            <a href='/users/signup'>Sign up</a>
-            <a href='/users/login'>Log in</a>
+            <a href='/users/signup'>Sign up</a><br>
+            <a href='/users/login'>Log in</a><br>
 
         <?php endif; ?>
 
