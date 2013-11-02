@@ -1,11 +1,8 @@
 <div class="mainBox" id="posts_users">
 
-<?php foreach($users as $user): ?>
+	<?php foreach($users as $user): ?>
 
-    
-		
-
-		<div id="posts_users_inside">
+    	<div id="posts_users_inside">
 
 		<!-- Show user's profile pic -->
 		<img src="../<?=$user['image_location']?>" width="50" height="50" alt="profile_pic">
@@ -32,6 +29,6 @@
 
 		</div>
 
-<?php endforeach; ?>
+	<?php endforeach; ?>
 
 </div>

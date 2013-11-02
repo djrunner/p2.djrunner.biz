@@ -55,7 +55,7 @@ class users_controller extends base_controller {
         # Runs the $_POST['email'] field through the Email test function
         if(!Email_Test::test($_POST['email']))
 
-            Router::redirect("/users/signup/error12");
+            Router::redirect("/users/signup/error");
         
 
 
