@@ -1,4 +1,4 @@
-<div class="mainBox" id="profile">
+<div class="mainBox" id="users_profile">
 
 <h1>This is the profile of <?=$user->first_name?></h1>
 
@@ -20,6 +20,16 @@
 	<?php else: ?>
 		<p>Add a photo!</p>
 	<?php endif; ?>
+
+	<br>
+
+	<?php if(isset($error)): ?>
+        <div class='error'>
+        </br>
+            File uploaded is not an image, or image is used by another user.
+        </div>
+        <br>
+    <?php endif; ?>
 
 	
 </p>
