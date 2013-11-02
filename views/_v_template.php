@@ -12,7 +12,7 @@
 
 <body>	
 
-	<div id='menu'>
+	<div id='v_template_menu'>
 
 		<a href='/'>Home</a><br>
 

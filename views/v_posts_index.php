@@ -16,6 +16,8 @@
         <?=Time::display($post['created'])?>
     </time>
 
+    <br>
+
     <?php if($post['post_user_id'] == $post['follower_id']): ?>
     	<a href='/posts/p_delete/<?=$post['post_id']?>'>Delete this post</a>
 	<!-- Otherwise, show the follow link -->

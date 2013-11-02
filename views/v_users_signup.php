@@ -1,4 +1,4 @@
-<div class="mainBox" id="signUp">
+<div class="mainBox" id="users_signUp">
 
 <form method='POST' action='/users/p_signup'>
 
@@ -19,6 +19,14 @@
     <br><br>
 
     <input type='submit' value='Sign Up'>
+
+    <?php if(isset($error)): ?>
+        <div class='error'>
+        <br>
+            Please do not enter a blank field.
+        </div>
+        <br>
+    <?php endif; ?>
 
 </form>
 

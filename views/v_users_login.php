@@ -1,4 +1,4 @@
-<div class="mainBox" id="login">
+<div class="mainBox" id="users_login">
 
 <form method='POST' action='/users/p_login'>
 
