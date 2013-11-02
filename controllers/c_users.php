@@ -6,11 +6,15 @@ class users_controller extends base_controller {
     } 
 
     public function index() {
-        echo "This is the index page";
+        
+    #If user is blank, they're not logged in; redirect them to the Login page
+        if (!$this->user) {
+            Router::redirect('/users/login');
+        }
+
     }
 
-    public function signup() {
-        echo "This is the signup page";
+    public function signup($error = NULL) {
 
         #Setup view
         $this->template->content = View::instance('v_users_signup');
@@ -18,9 +22,13 @@ class users_controller extends base_controller {
         #Set page title
         $this->template->title   = "Sign Up";
 
+        # Set up error
+        $this->template->content->error = $error;
+
         #Create array of CSS files
         $client_files_head = Array (
-            '../css/css.css'
+            '../css/css.css',
+            '../../css/css.css'
             );
 
         #Use Load client_files to generate the links from the above array
@@ -35,6 +43,22 @@ class users_controller extends base_controller {
         # Dump out the results of POST to see what the form submitted
         //print_r($_POST);
 
+        # Error testing, if any field is null or contains the empty string the user
+        # will be redirected to the signup page with an error message displayed.
+        if($_POST['first_name'] == null ||  $_POST['first_name'] == ''  ||
+           $_POST['last_name']  == null ||  $_POST['last_name']  == ''  ||
+           $_POST['email']      == null ||  $_POST['email']      == ''  ||
+           $_POST['password']   == null ||  $_POST['password']   == ''  
+        ) 
+            Router::redirect("/users/signup/error");
+
+        # Runs the $_POST['email'] field through the Email test function
+        if(!Email_Test::test($_POST['email']))
+
+            Router::redirect("/users/signup/error12");
+        
+
+
         # More data we want stored with the user
         $_POST['created'] = Time::now();
         $_POST['modified'] = Time::now();
@@ -48,8 +72,8 @@ class users_controller extends base_controller {
         # Insert this user into the database
         $user_id = DB::instance(DB_NAME)->insert('users', $_POST);
 
-        # For now, just confirm they've signed up -
-
+        # Sets up user to follow him or herself,
+        # The user will not see him or herself in the posts/users page.
         $data = Array(
             "created"          => Time::now(),
             "user_id"          => $user_id,
@@ -58,11 +82,11 @@ class users_controller extends base_controller {
 
         DB::instance(DB_NAME)->insert('users_users', $data);
 
+        # Sends the user to the login page
         Router::redirect('/users/login');
     }
 
     public function login($error = NULL) {
-        echo "This is the login page";
 
         # Setup View
         $this->template->content = View::instance('v_users_login');
@@ -74,8 +98,7 @@ class users_controller extends base_controller {
         #Create array of CSS files
         $client_files_head = Array (
             '../css/css.css',
-            '../../css/css.css',
-            '../../css/error.css'
+            '../../css/css.css'
             );
 
         #Use Load client_files to generate the links from the above array
@@ -106,9 +129,6 @@ class users_controller extends base_controller {
         if(!$token) {
 
             Router::redirect("/users/login/error");
-
-            # Send them back to the login poage
-            Router::redirect("/users/login");
 
         # But if we did
         } else {
@@ -142,7 +162,7 @@ class users_controller extends base_controller {
 
     }
 
-    public function profile($user_name = NULL) {
+    public function profile($error = NULL, $user_name = NULL) {
 
         #If user is blank, they're not logged in; redirect them to the Login page
         if (!$this->user) {
@@ -155,8 +175,10 @@ class users_controller extends base_controller {
         $this->template->content = View::instance('v_users_profile');
         $this->template->title = "Profile of ".$this->user->first_name;
 
-
         $this->template->content->user_name = $user_name;
+
+        # Set up error
+        $this->template->content->error = $error;
 
         #Create array of CSS files
         $client_files_head = Array (
@@ -174,15 +196,21 @@ class users_controller extends base_controller {
 
     public function upload_image() {
 
+        # Allows user to upload a picture,
         $allowedExts = array("gif", "jpeg", "jpg", "png");
         $temp = explode(".", $_FILES["file"]["name"]);
         $extension = end($temp);
+
+        # The file uploaded must be a gif, jpeg, jpg, pjpeg, x-png, or png
+        # The file cannot be any other file (i.e exe)
         if ((($_FILES["file"]["type"] == "image/gif")
         || ($_FILES["file"]["type"] == "image/jpeg")
         || ($_FILES["file"]["type"] == "image/jpg")
         || ($_FILES["file"]["type"] == "image/pjpeg")
         || ($_FILES["file"]["type"] == "image/x-png")
         || ($_FILES["file"]["type"] == "image/png"))
+
+        # The fille must be a certian size
         && ($_FILES["file"]["size"] < 20000)
         && in_array($extension, $allowedExts)) {
 
@@ -192,17 +220,19 @@ class users_controller extends base_controller {
 
             else {
     
+                # The uppload picture cannot already exist for another user
                 if (file_exists("images/" . $_FILES["file"]["name"])) {
                     echo $_FILES["file"]["name"] . " already exists. ";
 
-                    Router::redirect("/users/profile");
+                    Router::redirect("/users/profile/error");
                 } 
                 else {
+                    # Actual file stored in images folder
                     move_uploaded_file($_FILES["file"]["tmp_name"],
                     "images/" . $_FILES["file"]["name"]);
                     echo "Stored in: " . "images/" . $_FILES["file"]["name"];
 
-
+                    # Reference to image store in DB
                     $data = Array("image_location" => "images/" . $_FILES["file"]["name"]);
                     DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = '".$this->user->user_id."'");
 
@@ -210,8 +240,9 @@ class users_controller extends base_controller {
                 }
             }
         }
+        # If file not acceptable
         else {
-            Router::redirect("/users/profile");
+            Router::redirect("/users/profile/error");
         }
     }
 } # end of the class
