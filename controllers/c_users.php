@@ -230,7 +230,6 @@ class users_controller extends base_controller {
                     # Actual file stored in images folder
                     move_uploaded_file($_FILES["file"]["tmp_name"],
                     "images/" . $_FILES["file"]["name"]);
-                    echo "Stored in: " . "images/" . $_FILES["file"]["name"];
 
                     # Reference to image store in DB
                     $data = Array("image_location" => "images/" . $_FILES["file"]["name"]);

@@ -6,6 +6,8 @@
 
 <p>
 	</br>
+
+	<p>Add a photo!</p>
 	
 	<form method="POST" action="/users/upload_image" enctype="multipart/form-data">
 		<label for="file">Filename:</label>
@@ -18,7 +20,7 @@
 	<?php if(isset($user->image_location)): ?>
 		<img src="../<?=$user->image_location?>" width="150" height="150" alt="profile_pic">
 	<?php else: ?>
-		<p>Add a photo!</p>
+		<img src="/images/nophoto.jpg" width="150" height="150" alt="no_photo">
 	<?php endif; ?>
 
 	<br>

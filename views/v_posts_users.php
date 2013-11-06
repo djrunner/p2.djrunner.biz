@@ -5,7 +5,11 @@
     	<div id="posts_users_inside">
 
 		<!-- Show user's profile pic -->
-		<img src="../<?=$user['image_location']?>" width="50" height="50" alt="profile_pic">
+		<?php if(isset($user['image_location'])): ?>
+		   <img src="../<?=$user['image_location']?>" width="50" height="50" alt="profile_pic">
+	    <?php else: ?>
+		   <img src="/images/nophoto.jpg" width="50" height="50" alt="no_photo">
+	    <?php endif; ?>
 
 		<!-- Print this user's name -->
 		<?=$user['first_name']?> <?=$user['last_name']?>

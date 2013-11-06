@@ -60,6 +60,8 @@ class posts_controller extends base_controller {
 
     public function p_delete($post_id_to_delete) {
 
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
         #Delete a post
 
         DB::instance(DB_NAME)->delete('posts', "WHERE post_id = '$post_id_to_delete'");
@@ -92,6 +94,8 @@ class posts_controller extends base_controller {
         WHERE users_users.user_id = '.$this->user->user_id .'
         ORDER BY posts.created DESC' ;
 
+    # Sanatize data
+    $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
     # Run the query
     $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -123,6 +127,9 @@ class posts_controller extends base_controller {
     	$q = "SELECT *
     		From users
             WHERE user_id != ".$this->user->user_id;
+
+        # Sanatize data
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
     	# Execute the query to get all the users.
     	# Store the result array in the variable $users
@@ -176,6 +183,9 @@ class posts_controller extends base_controller {
 	}
 
 	public function unfollow($user_id_followed) {
+
+        # Sanatize data
+        $_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		# Delete this connection
 		$where_condition = 'WHERE user_id = '.$this->user->user_id.' AND user_id_followed = '.$user_id_followed;
